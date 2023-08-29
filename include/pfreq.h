@@ -34,7 +34,7 @@ namespace Pattern16 {
 
 		template <size_t count>
 		class alignas(64) CacheSerialized {
-			static constexpr size_t size_ = count * 3 / 2 + (-(count * 3 / 2) & 47);
+			static constexpr size_t size_ = count * 3 / 2 + (-static_cast<int>(count * 3 / 2) & 47);
 			uint8_t underlying[size_]{};
 			template <typename T>
 			class Entry {
