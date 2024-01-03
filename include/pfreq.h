@@ -15,7 +15,7 @@ namespace Pattern16 {
 
 #include "pfreq.inl"
 
-		auto getFrequencies16(const void* regionStart, const void* regionEnd, Frequencies& frequencies) {
+		inline auto getFrequencies16(const void* regionStart, const void* regionEnd, Frequencies& frequencies) {
 			auto cur = reinterpret_cast<const uint64_t*>(regionStart);
 			auto end = reinterpret_cast<const uint64_t*>(reinterpret_cast<const uint8_t*>(regionEnd) - 1);
 			auto base = frequencies.data();
@@ -100,7 +100,7 @@ namespace Pattern16 {
 		using Frequencies16 = CacheSerialized<0x2000>;
 
 		template <BMI_VERSION version>
-		auto makeFrequencyCache12_t(const Frequencies& frequencies, Frequencies16& out) {
+		static auto makeFrequencyCache12_t(const Frequencies& frequencies, Frequencies16& out) {
 			std::multimap<uint64_t, uint16_t> frequencyMap;
 			for (int i = 0; i < 8192; ++i) {
 				auto frequency8 = 0ull;
@@ -122,7 +122,7 @@ namespace Pattern16 {
 			return out;
 		}
 
-		auto& loadFrequencyCache() {
+		inline auto& loadFrequencyCache() {
 			return *reinterpret_cast<const Frequencies16*>(frequencies12_t);
 		}
 	}

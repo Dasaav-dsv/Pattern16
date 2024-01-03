@@ -33,9 +33,9 @@
 #endif
 
 #if defined(_MSC_VER)
-#define PATTERN16_NO_INLINE __declspec(noinline)
+#define PATTERN16_NO_INLINE __declspec(noinline) static
 #else
-#define PATTERN16_NO_INLINE __attribute__ ((noinline))
+#define PATTERN16_NO_INLINE __attribute__ ((noinline)) static
 #endif
 
 #if defined(__GNUC__) || defined(__clang__)
