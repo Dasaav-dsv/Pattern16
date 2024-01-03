@@ -91,7 +91,7 @@ namespace Pattern16 {
 		template <size_t alignment, typename T>
 		PATTERN16_FORCE_INLINE constexpr auto alignUp(T value) {
 			auto out = (std::size_t)value;
-			out = out + (-out & (alignment - 1));
+			out = out + (-static_cast<int>(out) & (alignment - 1));
 			return out;
 		}
 
@@ -166,11 +166,11 @@ namespace Pattern16 {
 					bitmask -= bitmask2;
 					mask &= bitmask2;
 					result <<= len;
-					result |= (a & bitmask) >> -offset;
+					result |= (a & bitmask) >> -static_cast<int>(offset);
 				}
 				else {
-					bitmask -= bitmask >> -start;
-					result <<= -start;
+					bitmask -= bitmask >> -static_cast<int>(start);
+					result <<= -static_cast<int>(start);
 					result |= a & bitmask;
 					break;
 				}
@@ -200,7 +200,7 @@ namespace Pattern16 {
 					a >>= len;
 				}
 				else {
-					auto bitmask2 = bitmask << -start;
+					auto bitmask2 = bitmask << -static_cast<int>(start);
 					bitmask -= bitmask2;
 					result |= (a << start) & bitmask;
 					break;

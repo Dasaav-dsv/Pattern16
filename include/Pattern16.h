@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "scanners/base.h"
 
 namespace Pattern16 {
