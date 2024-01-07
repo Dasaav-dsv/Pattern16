@@ -252,10 +252,10 @@ namespace Pattern16 {
 				auto cur_sig_start = reinterpret_cast<const uint64_t*>(cur_byte);
 				auto length_ = length;
 				while (length_--) {
-					if (!length_) return (const void*)cur_sig_start;
 					auto potential_match = cur_sig_start[length_];
 					potential_match ^= psig[length_];
 					if (potential_match & signature.second[length_]) break;
+					if (!length_) return (const void*)cur_sig_start;
 				}
 			} while (++cur_byte < end_byte);
 			return nullptr;

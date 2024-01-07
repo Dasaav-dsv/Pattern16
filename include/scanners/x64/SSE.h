@@ -86,10 +86,10 @@ namespace Pattern16 {
 				auto cur_sig_start = reinterpret_cast<const __m128i*>(cur_byte);
 				auto length_ = length;
 				while (length_--) {
-					if (!length_) return (const void*)cur_sig_start;
 					auto potential_match = _mm_loadu_si128(cur_sig_start + length_);
 					potential_match = _mm_xor_si128(potential_match, signature.first[length_]);
 					if (!_mm_testz_si128(potential_match, signature.second[length_])) break;
+					if (!length_) return (const void*)cur_sig_start;
 				}
 			} while (++cur_byte < end_byte);
 			return nullptr;
